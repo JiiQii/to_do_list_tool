@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block main %}
+
+<div class="container">
+
+  <table class="table" style="text-align: center;">
+    <tr class="table_head">
+      <th>Topic</th>
+      <th>Title</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th>Create</th>
+      <th>Expect</th>
+      <th>Remain</th>
+    </tr>
+    {% for task in task_list %}
+    <tr class="table_content" class="table_strip">
+      <td class="align-middle">{{task.topic}}</td>
+      <td class="align-middle">{{task.title}}</td>
+      <td class="align-middle">{{task.get_priority_display}}</td>
+      <td class="align-middle">{{task.get_status_display}}</td>
+      <td>{{task.create_time | date:'Y-m-d H:i'}}</td>
+      {% if task.expect_time == null %}
+      <td>-------------</td>
+      <td>-------------</td>
+      {% else %}
+      <td>{{task.expect_time | date:'Y-m-d H:i'}}</td>
+      <td>{{task.expect_time | timeuntil }}</td>
+      {% endif %}
+    </tr>
+    <tr style="border:0;">
+      <td colspan="4">{{task.desc}}</td>
+      <td colspan="3">
+        {% if user.is_authenticated %}
+        <a class="btn btn-danger" href="{% url 'tasks:task_remove' pk=task.pk %}" role="button">Remove</a>
+        <a class="btn btn-warning" href="{% url 'tasks:task_edit' pk=task.pk %}" role="button">Edit</a>
+        <a class="btn btn-success" href="{% url 'tasks:task_finish' pk=task.pk %}" role="button">Done</a>
+        {% endif %}
+      </td>
+    </tr>
+
+      {% endfor %}
+  </table>
+
+<br>
+    <center><a class="btn btn-primary btn-lg" href="{% url 'tasks:task_new' %}" role="button"><b>+</b></a></center>
+</div>
+<br>
+
+
+
+{% endblock %}

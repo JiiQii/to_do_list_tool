@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="container">
+
+
+      <table class="table">
+        <thead>
+          <tr>
+
+          <tr>
+            <th><a href="{% url 'tasks:task_history' %}?ordering=topic&order={% if order == 'desc' %}asc{% else %}desc{% endif %}">Topic</a></th>
+            <th scope="col">Title</th>
+            <th scope="col">Desc</th>
+            <th><a href="{% url 'tasks:task_history' %}?ordering=-finished_time&order={% if order == 'desc' %}asc{% else %}desc{% endif %}">Finish</a></th>
+            <th scope="col">Tasktime</th>
+          </tr>
+        </thead>
+        {% for task in task_list %}
+        <tr>
+          <td class="align-middle">{{task.topic}}</td>
+          <td class="align-middle">{{task.title}}</td>
+          <td class="align-middle">{{task.desc}}</td>
+          <td>{{task.finished_time | date:'Y-m-d H:i'}}</td>
+          <td>{{task.finished_time | timeuntil:task.create_time}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <br>
+          <center><a class="btn btn-primary btn-lg" href="{% url 'tasks:task_list' %}" role="button">BackToNow</a></center>
+      <br>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block main %}
+<p>Hello</p>
+{% for task in task_list %}
+<div class="container">
+  <table class="table table-bordered" style="text-align: center;">
+    <tbody>
+      <tr>
+        <td>{{task.priority}}</td>
+        <td>{{task.title}}</td>
+        <!-- <th scope="col">Remain</th>   {{ conference_date|timeuntil:from_date }}  -->
+        <!-- <td>{{task.expect_time|date:"D d M Y"}} </td> -->
+        <td style="border:none;"><button type="button" class="btn btn-warning" href="{% url 'task_edit' %}">Edit</button></td>
+      </tr>
+      <tr>
+        <td colspan="3">{{task.desc}}</td>
+        <td><button type="button" class="btn btn-success" href="{% url 'task_finish' %}">Done</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+</div>
+
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="container">
+  <form action="" method="POST">
+    {% csrf_token %}
+  <p>Are you sure you want to delete "{{ object.title }}"?</p>
+  <div class="btn-toolbar">
+    <a class="btn btn-warning btn-lg" href="{% url 'tasks:task_list' %}" role="button">Cancle</a></center>
+    <input class='btn btn-danger' type="submit" value="Confirm"/>
+  </div>
+
+
+
+  </form>
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block main %}
+<div class="container">
+  <table class="table" style="text-align: center;">
+    {% for topic in topics %}
+    <tr >
+      <td class="align-middle">{{topic.name}}</td>
+      <td class="align-middle">
+        {% if user.is_authenticated %}
+        <a class="btn btn-danger" href="{% url 'tasks:task_remove' pk=topic.pk %}" role="button">Remove</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <hr>
+  <div class="container">
+    <center>
+      <form class="" action="" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary"><b>+</b></button>
+      </form>
+  </center>
+  <hr>
+    </div>
+</div>
+{% endblock %}

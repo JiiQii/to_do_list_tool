@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+         {# Adds date-picker required JS and CSS #}
+
+
+{% block main %}
+
+<div class="container">
+  <form class="" action="" method="POST">
+
+    {% csrf_token %}
+    {% bootstrap_css %}         {# Embed Bootstrap CSS #}
+    {% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+    {{ form.media }}
+    {% bootstrap_form form %}
+    <div class="float-right">
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </form>
+</div>
+<br><br><br>
+{% endblock %}
